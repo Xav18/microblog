@@ -12,6 +12,7 @@ from app.main import bp
 from flask import g
 from app.main.forms import SearchForm
 from werkzeug.exceptions import BadRequest
+from app.odk import odk_post
 
 
 
@@ -26,7 +27,8 @@ def before_request():
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
-def index(): 
+def index():
+    odk_post()
     form = PostForm()
     if form.validate_on_submit(): 
         try:

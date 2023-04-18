@@ -13,7 +13,7 @@ from config import Config
 from elasticsearch import Elasticsearch
 from redis import Redis
 import rq
-
+import click
 
 db = SQLAlchemy()
 migrate = Migrate()

@@ -132,3 +132,5 @@ config.py
 
 #translations
 *.mo
+
+app/.pyodk_config.toml
