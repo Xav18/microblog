@@ -2,4 +2,4 @@
 base_url = "https://www.fakewebaddress.com"
 username = "fakeaddress@email.com"
 password = "fakepassword"
-default_project_id = number
+default_project_id = 0
