@@ -59,7 +59,7 @@ def odk_post():
             post = Post(body=str(content), author=user)
             db.session.add(post)
             update_review_state(6, 'mb_post', sub_id,  'approved')
-    print(i + " submissons added to db.")        
+    print(str(i) + " submissons added to db.")        
     db.session.commit()
     
 
