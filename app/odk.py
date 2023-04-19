@@ -47,7 +47,7 @@ def update_review_state(project_id, form_id, submission_id, review_state):
 
 def odk_post():
     modded_lines=0
-    print('+\n' + str(datetime.now()))
+    print('\n' + str(datetime.now()))
     user = User.query.filter_by(username='odk').one_or_none()
     if user is None:
         raise click.ClickException("User doesn't exist")
