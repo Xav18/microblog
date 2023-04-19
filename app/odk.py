@@ -46,17 +46,20 @@ def update_review_state(project_id, form_id, submission_id, review_state):
 
 
 def odk_post():
+    i=0
     print(str(datetime.now()))
     user = User.query.filter_by(username='odk').first_or_404()
     form_data = client.submissions.get_table(form_id="mb_post", project_id=6) #submission data
     for submission in form_data.get('value'):
         review_state = submission.get('__system').get('reviewState')
         if not str(review_state)=='approved':
+            i+=1
             content = submission.get('content')
             sub_id = submission.get('__id') 
             post = Post(body=str(content), author=user)
             db.session.add(post)
-            update_review_state(6, 'mb_post', sub_id,  'approved') 
+            update_review_state(6, 'mb_post', sub_id,  'approved')
+    print(i + " submissons added to db.")        
     db.session.commit()
     
 
