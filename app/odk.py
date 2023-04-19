@@ -1,6 +1,8 @@
 from pyodk.client import Client
 from app.models import User, Post
 from app import db
+from datetime import datetime
+import time
 
 import requests, json, logging
 
@@ -35,6 +37,7 @@ def update_review_state(project_id, form_id, submission_id, review_state):
         assert review_submission_response.status_code == 200
     except AssertionError:
         log.error("Error while update submission state")
+        print(review_submission_response.status_code)
     client.close()
 
 
@@ -43,6 +46,7 @@ def update_review_state(project_id, form_id, submission_id, review_state):
 
 
 def odk_post():
+    print(str(datetime.now()))
     user = User.query.filter_by(username='odk').first_or_404()
     form_data = client.submissions.get_table(form_id="mb_post", project_id=6) #submission data
     for submission in form_data.get('value'):
