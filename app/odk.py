@@ -9,6 +9,7 @@ import requests, json, logging
 log = logging.getLogger("app")
 
 client = Client(config_path="app/.pyodk_config.toml")
+project_id= client.config.central.default_project_id
 
 
 def update_review_state(project_id, form_id, submission_id, review_state):
@@ -57,7 +58,7 @@ def write_users():
 def odk_post():
     modded_lines=0
     print('\n' + str(datetime.now()))
-    form_data = client.submissions.get_table(form_id="mb_post", project_id=6) #submission data
+    form_data = client.submissions.get_table(form_id="mb_post", project_id=project_id) #submission data
     for submission in form_data.get('value'):
         review_state = submission.get('__system').get('reviewState')
         if not str(review_state)=='approved':
@@ -68,7 +69,7 @@ def odk_post():
             sub_id = submission.get('__id') 
             post = Post(body=str(content), author=user)
             db.session.add(post)
-            update_review_state(6, 'mb_post', sub_id,  'approved')
+            update_review_state(project_id, 'mb_post', sub_id,  'approved')
     print(str(modded_lines) + " submissons added to db.")        
     db.session.commit()
     
