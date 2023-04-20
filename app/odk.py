@@ -62,8 +62,8 @@ def odk_post():
         review_state = submission.get('__system').get('reviewState')
         if not str(review_state)=='approved':
             modded_lines+=1
-            username = submission.get('sign_in').get('user')
-            user=User.query.filter_by(username=username).first()
+            id = int(submission.get('sign_in').get('user'))
+            user=User.query.get(id)
             content = submission.get('post').get('content')
             sub_id = submission.get('__id') 
             post = Post(body=str(content), author=user)
