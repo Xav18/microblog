@@ -134,3 +134,4 @@ config.py
 *.mo
 
 app/.pyodk_config.toml
+users.csv
