@@ -42,8 +42,6 @@ def update_review_state(project_id, form_id, submission_id, review_state):
         print(review_submission_response.status_code)
     
 
-
-
 def write_users():
     with open('users.csv', 'w') as file:
         header=['name', 'label']
