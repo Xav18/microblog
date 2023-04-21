@@ -9,8 +9,8 @@ import requests, json, logging
 log = logging.getLogger("app")
 
 client = Client(config_path="app/.pyodk_config.toml")
-project_id=client.config.central.default_project_id
-
+project_id = client.config.central.default_project_id
+form_id = 'mb_post'
 
 def update_review_state(project_id, form_id, submission_id, review_state):
     """

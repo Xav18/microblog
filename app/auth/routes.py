@@ -7,7 +7,7 @@ from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, \
     ResetPasswordRequestForm, ResetPasswordForm
 from app.models import User
-from app.odk import write_users,  add_file_to_published_form
+from app.odk import write_users,  add_file_to_published_form, project_id, form_id
 from app.auth.email import send_password_reset_email
 
 
@@ -46,6 +46,7 @@ def register():
         db.session.add(user) #adds the new user to the db
         db.session.commit()
         write_users()
+        add_file_to_published_form('users.csv', project_id, form_id) 
         flash(_('Congratulations, you are now a registered user!'))
         return redirect(url_for('auth.login')) #sends to login page
     return render_template('auth/register.html', title=_('Register'),
