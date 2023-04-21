@@ -14,10 +14,6 @@ def get_odk_posts():
     # * * * * * cd /home/path_vers_le/microblog && venv/bin/flask get-odk-posts >> post_tries.log 2>&1
     odk_post()
 
-@app.cli.command("write-user-file")
-def write_users():
-    """writes the users.csv file"""
-    write_users()
 
 @app.cli.command("update-odk")
 @click.argument('file_name')
