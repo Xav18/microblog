@@ -15,6 +15,9 @@ def get_odk_posts():
     odk_post()
 
 @app.cli.command("update-odk")
+@click.argument('file_name')
+@click.argument('project_id',)
+@click.argument('form_id')
 def update_odk_file(file_name, project_id, form_id):
     """updates ODK  project {project_id} form {form_id} with the updated file {file_name}"""
     add_file_to_published_form(file_name, project_id, form_id)
