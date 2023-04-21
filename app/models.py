@@ -80,7 +80,7 @@ class PaginatedAPIMixin(object):
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'before_commit', SearchableMixin.after_commit)"""
 
-#create the nn join table  
+#create the nn join tables  
 followers = db.Table(
     'followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
@@ -116,11 +116,7 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
     notifications= db.relationship('Notification', backref='user', lazy='dynamic')
     tasks = db.relationship('Task', backref = 'user', lazy='dynamic')
     token=db.Column(db.String(32), index=True, unique=True)
-    token_expiration = db.Column(db.DateTime)
-    # liked_posts=db.relationship('Post', secondary=likes, 
-    #                             primaryjoin=likes.c.liker_id==id,
-    #                             secondaryjoin=likes.c.post_id==Post.id, 
-    #                             backref='liked_by', lazy='dynamic')    
+    token_expiration = db.Column(db.DateTime)  
 
     def __repr__(self): 
         return '<User {}>'.format(self.username)
@@ -269,7 +265,6 @@ class Post(
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     language = db.Column(db.String(5))
-    #nb_likes = db.Column(db.Integer)
     likers : Mapped[List[User]] = db.relationship(secondary=likes)
 
     def __repr__(self):
